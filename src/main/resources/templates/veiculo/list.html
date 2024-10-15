@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Veículos</title>
+    <link rel="shortcut icon" href="/veiculo.ico" />
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Lista de Veículos</h1>
+<table class="table" border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Preço</th>
+        <th>Ano Fabricação</th>
+        <th colspan="2">Ações</th>
+    </tr>
+    </thead>
+    <tr th:each="v : ${veiculos}">
+        <td th:text="${v.id}"> </td>
+        <td th:text="${v.marca}"> </td>
+        <td th:text="${v.modelo}"> </td>
+        <td th:text="${v.preco}"> </td>
+        <td th:text="${v.anoFabricacao}"> </td>
+        <td> <a th:href="@{/veiculo/edit/{id}(id=${v.id})}">Editar</a> </td>
+        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/veiculo/remove/{id}(id=${v.id})}">Excluir</a> </td>
+    </tr>
+</table>
+<div class="new-button-container">
+    <a href="/veiculo/form" class="btn-new">Novo Veículo</a>
+</div>
+</body>
+</html>
