@@ -165,3 +165,19 @@ h1 {
         font-size: 0.9em;
     }
 }
+
+
+body {
+    background-image: url('veiculos.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9; /* Ajusta a opacidade do background se necessário */
+}
+
+.table-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Deixa a tabela com fundo branco semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+}
+
