@@ -1,7 +1,7 @@
 package br.edu.ifto.aula03.model.repository;
 
 import br.edu.ifto.aula03.model.entity.Marca;
-import br.edu.ifto.aula03.model.entity.Veiculo;
+import br.edu.ifto.aula03.model.entity.Modelo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -11,32 +11,32 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MarcaRepository {
+public class ModeloRepository {
 
     @PersistenceContext
     private EntityManager em;
 
     @Transactional
-    public void save(Marca marca) {
-        em.merge(marca);
+    public void save(Modelo modelo) {
+        em.merge(modelo);
     }
 
-    public Marca marca(Long id) {
-        return em.find(Marca.class, id);
+    public Modelo modelo(Long id) {
+        return em.find(Modelo.class, id);
     }
 
-    public List<Marca> marcas() {
-        Query query = em.createQuery("from Marca");
+    public List<Modelo> modelos() {
+        Query query = em.createQuery("from Modelo");
         return query.getResultList();
     }
 
     @Transactional
     public void remove(Long id) {
-        Marca marca = em.find(Marca.class, id);
-        em.remove(marca);
+        Modelo modelo = em.find(Modelo.class, id);
+        em.remove(modelo);
     }
-
-    public void update(Marca marca) {
-        em.merge(marca);
+    @Transactional
+    public void update(Modelo modelo) {
+        em.merge(modelo);
     }
 }

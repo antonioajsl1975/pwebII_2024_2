@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>Lista de Veículos</h1>
+
 <table class="table" border="1">
     <thead>
     <tr>
@@ -19,18 +20,49 @@
         <th colspan="2">Ações</th>
     </tr>
     </thead>
+    <tbody>
     <tr th:each="v : ${veiculos}">
         <td th:text="${v.id}"> </td>
-        <td th:text="${v.marca}"> </td>
-        <td th:text="${v.modelo}"> </td>
-        <td th:text="${v.preco}"> </td>
+        <td th:text="${v.modelo.marca.nome}"> </td>
+        <td th:text="${v.modelo.nome}"> </td>
+        <td th:text="${#numbers.formatCurrency(v.preco)}"> </td>
         <td th:text="${v.anoFabricacao}"> </td>
-        <td> <a th:href="@{/veiculo/edit/{id}(id=${v.id})}">Editar</a> </td>
-        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/veiculo/remove/{id}(id=${v.id})}">Excluir</a> </td>
+        <td>
+            <a th:href="@{/veiculo/edit/{id}(id=${v.id})}">Editar</a>
+        </td>
+        <td>
+            <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+               th:href="@{/veiculo/remove/{id}(id=${v.id})}">Excluir</a>
+        </td>
     </tr>
+    </tbody>
 </table>
+
+<!-- Navegação de Paginação -->
+<div class="pagination-container">
+    <!-- Botão "Anterior" -->
+    <span th:if="${currentPage > 0}">
+        <a th:href="@{/veiculo/list(page=${currentPage - 1}, size=${pageSize})}" class="btn-pagination">&laquo; Anterior</a>
+    </span>
+
+    <!-- Números de página -->
+    <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:href="@{/veiculo/list(page=${i}, size=${pageSize})}"
+           th:text="${i + 1}"
+           th:classappend="${i == currentPage} ? 'active-page' : ''"
+           class="btn-pagination">1</a>
+    </span>
+
+    <!-- Botão "Próximo" -->
+    <span th:if="${currentPage < totalPages - 1}">
+        <a th:href="@{/veiculo/list(page=${currentPage + 1}, size=${pageSize})}" class="btn-pagination">Próximo &raquo;</a>
+    </span>
+</div>
+
+<!-- Botão para adicionar novo veículo -->
 <div class="new-button-container">
     <a href="/veiculo/form" class="btn-new">Novo Veículo</a>
 </div>
+
 </body>
 </html>

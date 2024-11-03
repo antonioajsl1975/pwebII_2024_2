@@ -15,7 +15,7 @@ public class Modelo {
     @JoinColumn(name = "marca_id")
     private Marca marca;
 
-    @OneToMany(mappedBy = "modelo" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "modelo" , cascade = CascadeType.ALL)
     private List<Veiculo> veiculos;
 
     public Modelo() {}
@@ -40,6 +40,7 @@ public class Modelo {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     public Marca getMarca() {
         return marca;

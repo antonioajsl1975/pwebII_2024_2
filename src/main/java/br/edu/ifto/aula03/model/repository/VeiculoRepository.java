@@ -1,11 +1,11 @@
 package br.edu.ifto.aula03.model.repository;
 
 import br.edu.ifto.aula03.model.entity.Veiculo;
+import jakarta.persistence.Query;
+import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -24,9 +24,18 @@ public class VeiculoRepository {
         return em.find(Veiculo.class, id);
     }
 
-    public List<Veiculo> veiculos() {
+    // Método para buscar veículos com paginação
+    public List<Veiculo> veiculos(int page, int size) {
         Query query = em.createQuery("from Veiculo");
+        query.setFirstResult(page * size);  // Define o "offset"
+        query.setMaxResults(size);  // Define o número de resultados por página
         return query.getResultList();
+    }
+
+    // Metodo para contar o número total de veículos
+    public long count() {
+        Query query = em.createQuery("SELECT COUNT(v) FROM Veiculo v");
+        return (long) query.getSingleResult();
     }
 
     @Transactional
@@ -35,7 +44,9 @@ public class VeiculoRepository {
         em.remove(veiculo);
     }
 
+    @Transactional
     public void update(Veiculo veiculo) {
         em.merge(veiculo);
     }
 }
+

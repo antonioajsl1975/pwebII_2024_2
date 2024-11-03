@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Modelos</title>
+    <link rel="shortcut icon" href="/veiculo.ico" />
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Lista de Modelos</h1>
+<table class="table" border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th colspan="2">Ações</th>
+    </tr>
+    </thead>
+    <tr th:each="m : ${modelos}">
+        <td th:text="${m.id}"> </td>
+        <td th:text="${m.marca.nome}"></td>
+        <td th:text="${m.nome}"></td>
+        <td> <a th:href="@{/modelo/edit/{id}(id=${m.id})}">Editar</a> </td>
+        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/modelo/remove/{id}(id=${m.id})}">Excluir</a> </td>
+    </tr>
+</table>
+<div class="new-button-container">
+    <a href="/modelo/form" class="btn-new">Novo Modelo</a>
+</div>
+</body>
+</html>

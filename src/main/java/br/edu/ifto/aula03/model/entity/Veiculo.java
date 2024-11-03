@@ -1,8 +1,8 @@
 package br.edu.ifto.aula03.model.entity;
 
 import jakarta.persistence.*;
-
-import java.util.Objects;
+import org.springframework.format.annotation.NumberFormat;
+import java.math.BigDecimal;
 
 @Entity
 public class Veiculo {
@@ -10,17 +10,18 @@ public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    private String marca;
     @ManyToOne
     @JoinColumn(name = "modelo_id")
     private Modelo modelo;
 
-    private String preco;
+//    @NumberFormat(style = NumberFormat.Style.CURRENCY)
+    private BigDecimal preco;
+
     private String anoFabricacao;
 
     public Veiculo() {}
 
-    public Veiculo(Long id, Modelo modelo, String preco, String anoFabricacao) {
+    public Veiculo(Long id, Modelo modelo, BigDecimal preco, String anoFabricacao) {
         this.id = id;
         this.modelo = modelo;
         this.preco = preco;
@@ -43,11 +44,11 @@ public class Veiculo {
         this.modelo = modelo;
     }
 
-    public String getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 

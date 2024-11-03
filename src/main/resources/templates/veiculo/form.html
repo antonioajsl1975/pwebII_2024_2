@@ -9,15 +9,18 @@
 </head>
 <body>
 
-<h1>Cadastro de Veiculos</h1>
+<h1>Cadastro de Veículos</h1>
 <form class="form-cadastro" th:action="${veiculo.id == null} ? @{/veiculo/save} : @{/veiculo/update}" th:object="${veiculo}" method="post">
+
   <input type="hidden" th:field="*{id}">
-  <div class="form-group">
-    <input type="text" th:field="*{marca}"  placeholder="Marca">
-  </div>
 
   <div class="form-group">
-    <input type="text" th:field="*{modelo}"  placeholder="Modelo">
+    <label for="modelo">Modelo</label>
+    <select th:field="*{modelo.id}" id="modelo">
+      <option value=""  selected>Selecione o modelo</option>
+      <option th:each="modelo : ${modelos}" th:value="${modelo.id}" th:text="${modelo.nome}"
+        th:selected="${modelo.id == veiculo.modelo.id}"></option>
+    </select>
   </div>
 
   <div class="form-group">
@@ -25,13 +28,16 @@
   </div>
 
   <div class="form-group">
-    <input type="text" th:field="*{anoFabricacao}"  placeholder="Ano Fabricação">
+    <label for="anoFabricacao">Ano de Fabricação:</label>
+    <select id="anoFabricacao" th:field="*{anoFabricacao}">
+      <option value="" selected>Selecione o ano</option>
+      <option th:each="ano : ${anos}" th:value="${ano}" th:text="${ano}"></option>
+    </select>
   </div>
 
   <div class="form-group">
     <input type="submit" value="Enviar">
   </div>
-
 </form>
 
 </body>
