@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-
 import java.util.List;
 
 @Repository
@@ -24,18 +23,10 @@ public class VeiculoRepository {
         return em.find(Veiculo.class, id);
     }
 
-    // Método para buscar veículos com paginação
-    public List<Veiculo> veiculos(int page, int size) {
-        Query query = em.createQuery("from Veiculo");
-        query.setFirstResult(page * size);  // Define o "offset"
-        query.setMaxResults(size);  // Define o número de resultados por página
-        return query.getResultList();
-    }
-
-    // Metodo para contar o número total de veículos
-    public long count() {
-        Query query = em.createQuery("SELECT COUNT(v) FROM Veiculo v");
-        return (long) query.getSingleResult();
+    // Método para buscar todos os veículos
+    public List<Veiculo> findAll() {
+        Query query = em.createQuery("FROM Veiculo");
+        return query.getResultList(); // Retorna todos os resultados
     }
 
     @Transactional
@@ -49,4 +40,5 @@ public class VeiculoRepository {
         em.merge(veiculo);
     }
 }
+
 

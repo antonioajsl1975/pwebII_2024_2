@@ -38,27 +38,6 @@
     </tbody>
 </table>
 
-<!-- Navegação de Paginação -->
-<div class="pagination-container">
-    <!-- Botão "Anterior" -->
-    <span th:if="${currentPage > 0}">
-        <a th:href="@{/veiculo/list(page=${currentPage - 1}, size=${pageSize})}" class="btn-pagination">&laquo; Anterior</a>
-    </span>
-
-    <!-- Números de página -->
-    <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-        <a th:href="@{/veiculo/list(page=${i}, size=${pageSize})}"
-           th:text="${i + 1}"
-           th:classappend="${i == currentPage} ? 'active-page' : ''"
-           class="btn-pagination">1</a>
-    </span>
-
-    <!-- Botão "Próximo" -->
-    <span th:if="${currentPage < totalPages - 1}">
-        <a th:href="@{/veiculo/list(page=${currentPage + 1}, size=${pageSize})}" class="btn-pagination">Próximo &raquo;</a>
-    </span>
-</div>
-
 <!-- Botão para adicionar novo veículo -->
 <div class="new-button-container">
     <a href="/veiculo/form" class="btn-new">Novo Veículo</a>

@@ -28,29 +28,20 @@ public class VeiculoController {
     @Autowired
     ModeloRepository modeloRepository;
 
-    //Método para gerar a lista de anos
+    // Método para gerar a lista de anos
     private List<Integer> gerarListaAnos() {
         int anoSeguinte = Year.now().getValue() + 1;
         return IntStream.rangeClosed(1990, anoSeguinte)
                 .boxed().collect(Collectors.toList());
     }
 
-    // Método para listar veículos com paginação
+    // Método para listar todos os veículos
     @GetMapping("/list")
-    public ModelAndView listar(@RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "5") int size,
-                               ModelMap model) {
-        List<Veiculo> veiculos = veiculoRepository.veiculos(page, size);
-
-        // Calculando o número total de veículos para a paginação
-        long totalVeiculos = veiculoRepository.count();
-        int totalPages = (int) Math.ceil((double) totalVeiculos / size);
+    public ModelAndView listar(ModelMap model) {
+        List<Veiculo> veiculos = veiculoRepository.findAll(); // Obter todos os veículos
 
         model.addAttribute("veiculos", veiculos);
         model.addAttribute("modelos", modeloRepository.modelos());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("pageSize", size);
 
         return new ModelAndView("/veiculo/list", model);
     }
@@ -59,8 +50,6 @@ public class VeiculoController {
     public ModelAndView form(Veiculo veiculo, ModelMap model) {
         model.addAttribute("marcas", marcaRepository.marcas());
         model.addAttribute("modelos", modeloRepository.modelos());
-
-        // Adiciona a lista de anos ao ModelAndView
         model.addAttribute("anos", gerarListaAnos());
         return new ModelAndView("veiculo/form", model);
     }
@@ -90,20 +79,6 @@ public class VeiculoController {
         veiculoRepository.save(veiculo);
         return new ModelAndView("redirect:/veiculo/list");
     }
-
-//    @GetMapping("/form")
-//    public ModelAndView mostrarForm() {
-//        // Cria o ModelAndView e define o nome da view "veiculo/form"
-//        ModelAndView modelAndView = new ModelAndView("veiculo/form");
-//
-//        // Adiciona a lista de anos ao ModelAndView
-//        int anoSeguinte = Year.now().getValue() + 1;
-//        modelAndView.addObject("anos", IntStream.rangeClosed(1980, anoSeguinte)
-//                .boxed().collect(Collectors.toList()));
-//
-//        // Adiciona um objeto Veiculo vazio ao ModelAndView
-//        modelAndView.addObject("veiculo", new Veiculo());
-//        return modelAndView;
-//    }
 }
+
 
