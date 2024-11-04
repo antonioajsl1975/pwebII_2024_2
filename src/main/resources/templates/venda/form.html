@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cadastro de Vendas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h1>Cadastro de Vendas</h1>
+<form class="form-cadastro" th:action="${venda.id == null} ? @{/venda/save} : @{/venda/update}" th:object="${venda}" method="post">
+  <input type="hidden" th:field="*{id}">
+
+  <div class="form-group">
+    <label>Data da Venda:</label>
+    <input type="text" th:field="*{dataVenda}" placeholder="Data da Venda">
+  </div>
+
+  <h3>Itens da Venda</h3>
+  <div th:each="item, iterStat : *{itensVenda}">
+    <div class="form-group">
+      <label>Produto:</label>
+      <select th:field="*{itensVenda[__${iterStat.index}__].produto.id}">
+        <option th:each="produto : ${produtos}" th:value="${produto.id}" th:text="${produto.nome}">Produto</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Quantidade:</label>
+      <input type="number" th:field="*{itensVenda[__${iterStat.index}__].quantidade}" placeholder="Quantidade" min="1">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="submit" value="Enviar">
+  </div>
+</form>
+</body>
+</html>

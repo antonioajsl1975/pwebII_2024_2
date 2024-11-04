@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Vendas</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Vendas</h1>
+
+<div class="table-container">
+    <!-- Tabela de Vendas -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Data</th>
+            <th>Total</th>
+            <th>Detalhes</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="venda : ${vendas}">
+            <td th:text="${venda.id}"></td>
+            <td th:text="${venda.dataVenda}"></td>
+            <td th:text="${#numbers.formatCurrency(venda.totalVenda())}"></td>
+            <td style="text-align: center">
+                <a th:href="@{/venda/detail/{id}(id=${venda.id})}" class="btn btn-primary" style="cursor: pointer;">itens</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
