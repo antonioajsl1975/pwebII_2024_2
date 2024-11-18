@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Venda</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Detalhes da Venda</h1>
+<!--Total da venda-->
+<div class="table-container">
+    <table class="table" style="width: 18%; background-color: #c4c6c4">
+        <tr>
+            <th style="text-align: right">Id Venda:</th>
+            <td th:text="${detail.id}"></td>
+        </tr>
+        <tr>
+            <th style="text-align: right">Total Venda:</th>
+            <td th:text="${#numbers.formatCurrency(detail.totalVenda())}"></td>
+        </tr>
+
+    </table>
+</div>
+
+<div class="table-container">
+    <!-- Tabela de Itens da Venda -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Descrição do Produto</th>
+            <th>Quantidade</th>
+            <th>Valor Unitário (R$)</th>
+            <th>Total (R$)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item,status : ${detail.itensVenda}">
+            <td th:text="${status.index+1}"></td>
+            <td th:text="${item.produto.descricao}"></td>
+            <td th:text="${item.quantidade}"></td>
+            <td th:text="${#numbers.formatCurrency(item.produto.valor)}"></td>
+            <td th:text="${#numbers.formatCurrency(item.totalItem())}"></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4" style="text-align: right; font-weight: bold;">Total da Venda:</td>
+            <td th:text="${#numbers.formatCurrency(detail.totalVenda())}" style="font-weight: bold;"></td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
