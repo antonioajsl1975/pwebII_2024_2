@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Clientes Pessoa Física</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<h1>Clientes Pessoa Física</h1>
+<!-- Tabela de pessoas -->
+<div class="table-container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>E-Mail</th>
+            <th colspan="2">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pf : ${pessoasfisicas}">
+            <td th:text="${pf.id}"></td>
+            <td th:text="${pf.nome}" style="text-align: left"></td>
+            <td th:text="${pf.cpf}"></td>
+            <td th:text="${pf.telefone}"></td>
+            <td th:text="${pf.email}"></td>
+            <td>
+                <a th:href="@{/pessoafisica/edit/{id}(id=${pf.id})}">Editar</a>
+            </td>
+            <td>
+                <a th:href="@{/pessoafisica/delete/{id}(id=${pf.id})}"
+                   onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

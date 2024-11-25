@@ -1,15 +1,20 @@
 package br.edu.ifto.aula05.model.entity;
 
-import jakarta.persistence.*;
-
-import java.io.Serializable;
+import jakarta.persistence.Entity;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class PessoaJuridica extends Pessoa implements Serializable {
-
-    private String razaoSocial;
+public class PessoaJuridica extends Pessoa {
     private String cnpj;
+    private String razaoSocial;
+
+    // Getters e setters
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
 
     public String getRazaoSocial() {
         return razaoSocial;
@@ -17,13 +22,5 @@ public class PessoaJuridica extends Pessoa implements Serializable {
 
     public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
     }
 }

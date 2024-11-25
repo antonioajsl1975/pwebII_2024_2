@@ -13,23 +13,19 @@
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
+            <th>Id</th>
             <th>Data</th>
-            <th>Total</th>
             <th>Cliente</th>
+            <th>Total</th>
             <th>Detalhes</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="venda : ${vendas}">
             <td th:text="${venda.id}"></td>
-            <td th:text="${venda.dataVenda}"></td>
+            <td th:text="${#temporals.format(venda.dataVenda, 'dd/MM/yyyy HH:mm:ss')}"></td>
+            <td th:text="${venda.pessoa instanceof T(br.edu.ifto.aula05.model.entity.PessoaFisica) ? venda.pessoa.nome : (venda.pessoa instanceof T(br.edu.ifto.aula05.model.entity.PessoaJuridica) ? venda.pessoa.razaoSocial : '')}"></td>
             <td th:text="${#numbers.formatCurrency(venda.totalVenda())}"></td>
-            <td style="text-align: left">
-                <!-- Verifica o tipo da pessoa com o atributo tipoPessoa -->
-                <span th:if="${venda.tipoPessoa == 'PessoaFisica'}" th:text="${venda.pessoa.nome}"></span>
-                <span th:if="${venda.tipoPessoa == 'PessoaJuridica'}" th:text="${venda.pessoa.razaoSocial}"></span>
-            </td>
             <td style="text-align: center">
                 <a th:href="@{/venda/detail/{id}(id=${venda.id})}" class="btn btn-primary" style="cursor: pointer;">itens</a>
             </td>

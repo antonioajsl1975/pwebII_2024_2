@@ -1,6 +1,5 @@
 package br.edu.ifto.aula05.model.repository;
 
-import br.edu.ifto.aula05.model.entity.Produto;
 import br.edu.ifto.aula05.model.entity.Venda;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -41,7 +40,7 @@ public class VendaRepository {
     }
 
     public List<Venda> findAll() {
-        Query query = em.createQuery("from Venda");
+        Query query = em.createQuery("SELECT v FROM Venda v JOIN FETCH v.pessoa");
         return query.getResultList();
     }
 }

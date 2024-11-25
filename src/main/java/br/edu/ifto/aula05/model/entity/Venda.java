@@ -18,18 +18,11 @@ public class Venda {
     private List<ItemVenda> itensVenda = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "pessoa_id")
+    @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
 
     @Transient
     private String tipoPessoa;
-
-    public Venda() {}
-
-    public Venda(Long id, LocalDateTime dataVenda) {
-        this.id = id;
-        this.dataVenda = dataVenda;
-    }
 
     public Long getId() {
         return id;
@@ -45,6 +38,10 @@ public class Venda {
 
     public void setDataVenda(LocalDateTime dataVenda) {
         this.dataVenda = dataVenda;
+    }
+
+    public void setItensVenda(List<ItemVenda> itensVenda) {
+        this.itensVenda = itensVenda;
     }
 
     public Pessoa getPessoa() {

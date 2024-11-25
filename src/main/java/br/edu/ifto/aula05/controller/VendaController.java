@@ -1,11 +1,10 @@
 package br.edu.ifto.aula05.controller;
 
-import br.edu.ifto.aula05.model.entity.Pessoa;
 import br.edu.ifto.aula05.model.entity.PessoaFisica;
 import br.edu.ifto.aula05.model.entity.PessoaJuridica;
 import br.edu.ifto.aula05.model.entity.Venda;
 import br.edu.ifto.aula05.model.repository.ItemVendaRepository;
-import br.edu.ifto.aula05.model.repository.PessoaRepository;
+import br.edu.ifto.aula05.model.repository.PessoaFisicaRepository;
 import br.edu.ifto.aula05.model.repository.VendaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class VendaController {
     private ItemVendaRepository itemVendaRepository;
 
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PessoaFisicaRepository PessoaFisicaRepository;
 
     @GetMapping("/form")
     public String form(Venda venda, ModelMap model) {
@@ -44,9 +43,9 @@ public class VendaController {
 
         for (Venda venda : vendas) {
             if (venda.getPessoa() instanceof PessoaFisica){
-                venda.setTipoPessoa("PessoaFisica");
+                venda.setTipoPessoa("Pessoafisica");
             } else if (venda.getPessoa() instanceof PessoaJuridica) {
-                venda.setTipoPessoa("PessoaJuridica");
+                venda.setTipoPessoa("Pessoajuridica");
             }
         }
         model.addAttribute("vendas", vendas);

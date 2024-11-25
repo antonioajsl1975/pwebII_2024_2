@@ -26,9 +26,9 @@ INSERT INTO produto (descricao, valor) VALUES ('Macarrão 500g', 3.40);
 INSERT INTO produto (descricao, valor) VALUES ('Farinha de Trigo 1kg', 4.80);
 INSERT INTO produto (descricao, valor) VALUES ('Leite Integral 1L', 4.30);
 
-INSERT INTO venda (data_venda, pessoa_id) VALUES ('2024-11-01 09:30:00', 1);
-INSERT INTO venda (data_venda, pessoa_id) VALUES ('2024-11-02 14:20:00', 2);
-INSERT INTO venda (data_venda, pessoa_id) VALUES ('2024-11-03 18:45:00', 5);
+INSERT INTO venda (data_venda, pessoa_id) VALUES ('2024-11-21T09:30:00', 1);
+INSERT INTO venda (data_venda, pessoa_id) VALUES ('2024-11-22T10:45:30', 2);
+INSERT INTO venda (data_venda, pessoa_id) VALUES ('2024-11-23T15:00:00', 3);
 
 INSERT INTO item_venda (quantidade, produto_id, venda_id) VALUES (2.0, 1, 1); -- 2 pacotes de Arroz na primeira venda
 INSERT INTO item_venda (quantidade, produto_id, venda_id) VALUES (1.0, 2, 1); -- 1 pacote de Feijão na primeira venda
