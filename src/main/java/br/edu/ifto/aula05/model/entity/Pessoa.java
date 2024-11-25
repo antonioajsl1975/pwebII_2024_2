@@ -44,4 +44,6 @@ public abstract class Pessoa {
     public List<Venda> getVendas() {
         return vendas;
     }
+
+    public abstract String getNomeOuRazaoSicial();
 }

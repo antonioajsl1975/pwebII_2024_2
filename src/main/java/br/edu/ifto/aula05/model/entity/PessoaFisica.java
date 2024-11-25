@@ -26,4 +26,9 @@ public class PessoaFisica extends Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public String getNomeOuRazaoSicial() {
+        return this.nome;
+    }
 }
